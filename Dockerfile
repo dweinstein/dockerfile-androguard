@@ -15,7 +15,7 @@ RUN pip install ipython
 RUN wget -qO- http://www.chilkatsoft.com/download/chilkat-9.4.1-python-2.7-x86_64-linux.tar.gz |   tar xfvz - -C /
 
 # install pyfuzzy
-RUN pip install "http://sourceforge.net/projects/pyfuzzy/files/latest/download\?source\=files"#pyfuzzy-0.1.0
+RUN pip install http://sourceforge.net/projects/pyfuzzy/files/latest/download\?source\=files#pyfuzzy-0.1.0
 
 # install python magic
 RUN pip install git+git://github.com/ahupp/python-magic
