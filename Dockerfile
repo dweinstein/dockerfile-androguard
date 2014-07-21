@@ -1,12 +1,12 @@
-FROM ubuntu:12.10
-MAINTAINER David Weinstein <dweinst@insitusec.com>
+FROM dockerfile/ubuntu:latest
+MAINTAINER dweinstein "dweinst@insitusec.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 
 # androguard dependencies
-RUN apt-get install -y mercurial git python python-setuptools g++ curl wget zip unzip
-RUN apt-get install -y python-dev python-bzutils libbz2-dev libmuparser-dev libsparsehash-dev python-ptrace python-pygments python-pydot liblzma-dev libsnappy-dev python-pip
+RUN apt-get install -y mercurial git python2.7 python-setuptools g++ curl wget zip unzip
+RUN apt-get install -y python-dev libbz2-dev libmuparser-dev libsparsehash-dev python-ptrace python-pygments python-pydot liblzma-dev libsnappy-dev python-pip
 
 # clone the androguard repo
 RUN hg clone https://androguard.googlecode.com/hg/ /opt/androguard
@@ -30,7 +30,6 @@ RUN cd /opt/androguard && python setup.py install
 
 # reduce some clutter
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
 VOLUME /apks
 
 CMD ["androlyze.py", "-s"]
