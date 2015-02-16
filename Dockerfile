@@ -1,30 +1,33 @@
-FROM dockerfile/ubuntu:latest
+FROM debian:jessie
 MAINTAINER dweinstein "dweinst@insitusec.com"
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
+ENV PYTHON /usr/bin/python2.7
 
-# androguard dependencies
-RUN apt-get install -y mercurial git python2.7 python-setuptools g++ curl wget zip unzip
-RUN apt-get install -y python-dev libbz2-dev libmuparser-dev libsparsehash-dev python-ptrace python-pygments python-pydot liblzma-dev libsnappy-dev python-pip
+RUN apt-get update && \
+    apt-get install -qq -y --no-install-recommends mercurial git python2.7 \
+      python-setuptools g++ curl wget zip unzip  python-dev libbz2-dev \
+      libmuparser-dev libsparsehash-dev python-ptrace python-pygments \
+      python-pydot liblzma-dev libsnappy-dev python-pip python-setuptools \
+      libc6 libc6-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# install IPython
-RUN pip install ipython
+# Install python deps
+RUN pip install requests yara ipython \
+      http://sourceforge.net/projects/pyfuzzy/files/latest/download\?source\=files#pyfuzzy-0.1.0 \
+      git+git://github.com/ahupp/python-magic && \
+    mkdir -p /tmp/chilkat && \
+    wget -qO- http://www.chilkatsoft.com/download/9.5.0.46/chilkat-9.5.0-python-2.7-x86_64-linux.tar.gz \
+    | tar xfvz - -C /tmp/chilkat/ && \
+    find /tmp/chilkat -type f -exec mv -i "{}" /usr/lib/python2.7/ \;
 
-# install chilkat
-RUN wget -qO- http://www.chilkatsoft.com/download/chilkat-9.4.1-python-2.7-x86_64-linux.tar.gz |   tar xfvz - -C /
+# obtain latest androguard from master branch
+ADD https://github.com/androguard/androguard/archive/master.zip /opt/androguard.zip
+RUN cd /opt && unzip androguard.zip && \
+    mv /opt/androguard-master /opt/androguard && \
+    cd /opt/androguard && python setup.py install
 
-# install pyfuzzy
-RUN pip install http://sourceforge.net/projects/pyfuzzy/files/latest/download\?source\=files#pyfuzzy-0.1.0
-
-# install python magic
-RUN pip install git+git://github.com/ahupp/python-magic
-
-# install androguard 
-RUN pip install hg+https://androguard.googlecode.com/hg/
-
-# reduce some clutter
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 VOLUME /apks
 
 CMD ["androlyze.py", "-s"]
+
