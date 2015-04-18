@@ -10,24 +10,25 @@ RUN apt-get update && \
       libmuparser-dev libsparsehash-dev python-ptrace python-pygments \
       python-pydot liblzma-dev libsnappy-dev python-pip python-setuptools \
       libc6 libc6-dev && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install python deps
-RUN pip install requests yara ipython \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
+    pip install requests yara ipython \
       http://sourceforge.net/projects/pyfuzzy/files/latest/download\?source\=files#pyfuzzy-0.1.0 \
       git+git://github.com/ahupp/python-magic && \
     mkdir -p /tmp/chilkat && \
     wget -qO- http://www.chilkatsoft.com/download/9.5.0.46/chilkat-9.5.0-python-2.7-x86_64-linux.tar.gz \
     | tar xfvz - -C /tmp/chilkat/ && \
-    find /tmp/chilkat -type f -exec mv -i "{}" /usr/lib/python2.7/ \;
+    find /tmp/chilkat -type f -exec mv -i "{}" /usr/lib/python2.7/ \; && \
+    rm -rf /tmp/chilkat
 
 # obtain latest androguard from master branch
 ADD https://github.com/androguard/androguard/archive/master.zip /opt/androguard.zip
 RUN cd /opt && unzip androguard.zip && \
     mv /opt/androguard-master /opt/androguard && \
-    cd /opt/androguard && python setup.py install
+    cd /opt/androguard && python setup.py install && \
+    rm -f /opt/androguard.zip
 
-VOLUME /apks
+VOLUME /data
+WORKDIR /opt/androguard
 
 CMD ["androlyze.py", "-s"]
 

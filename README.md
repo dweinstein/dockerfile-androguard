@@ -7,14 +7,14 @@ Docker file for building androguard dependencies w/ an **optional** interactive 
 
 This will use the pre-built image on the public registry (see [this](https://registry.hub.docker.com/u/dweinstein/androguard/))
 
-```
+```shell
 $ docker run -t -i dweinstein/androguard /bin/bash
 root@1fe111e78fc6:/# /opt/androlyze.sh
 ```
 
 Similarly this will start the `androlyze` shell by default:
 
-```
+```shell
 $ docker run -t -i dweinstein/androguard
 Androlyze version 2.0
 In [1]: apk = APK('/data/test.apk')
@@ -24,10 +24,9 @@ Out[2]: ['com.example.gangrene.GangreneActivity']
 ```
 
 
-```
 ## BUILD
 
-```
+```shell
 $ docker build -t androguard .
 ```
 
