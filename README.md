@@ -12,10 +12,11 @@ $ docker run -t -i dweinstein/androguard /bin/bash
 root@1fe111e78fc6:/# /opt/androlyze.sh
 ```
 
-Similarly this will start the `androlyze` shell by default:
+Similarly this will start the `androlyze` shell by default (the `-v` option is
+to mount a folder from the host to the guest):
 
 ```shell
-$ docker run -t -i dweinstein/androguard
+$ docker run -t -i -v /path/to/apks:/data dweinstein/androguard
 Androlyze version 2.0
 In [1]: apk = APK('/data/test.apk')
 
