@@ -8,6 +8,7 @@ Docker file for building androguard dependencies w/ an **optional** interactive 
 This will use the pre-built image on the public registry (see [this](https://registry.hub.docker.com/u/dweinstein/androguard/))
 
 ```shell
+$ docker pull dweinstein/androguard
 $ docker run -t -i dweinstein/androguard /bin/bash
 root@1fe111e78fc6:/# /opt/androlyze.sh -s
 ```
