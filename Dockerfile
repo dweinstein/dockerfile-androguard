@@ -9,7 +9,7 @@ RUN apt-get update && \
       python-setuptools g++ curl wget zip unzip  python-dev libbz2-dev \
       libmuparser-dev libsparsehash-dev python-ptrace python-pygments \
       python-pydot liblzma-dev libsnappy-dev python-pip python-setuptools \
-      libc6 libc6-dev && \
+      libc6 libc6-dev libmagic1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* && \
     pip install requests yara ipython \
       http://sourceforge.net/projects/pyfuzzy/files/latest/download\?source\=files#pyfuzzy-0.1.0 \
