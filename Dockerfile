@@ -6,7 +6,7 @@ ENV PYTHON /usr/bin/python2.7
 
 RUN apt-get update && \
     apt-get install -qq -y --no-install-recommends mercurial git python2.7 \
-      python-setuptools g++ curl wget zip unzip  python-dev libbz2-dev \
+      python-setuptools g++ curl wget zip unzip python-dev libbz2-dev \
       libmuparser-dev libsparsehash-dev python-ptrace python-pygments \
       python-pydot liblzma-dev libsnappy-dev python-pip python-setuptools \
       libc6 libc6-dev libmagic1 && \
