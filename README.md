@@ -1,3 +1,7 @@
+[![Docker Hub](http://img.shields.io/badge/docker-hub-brightgreen.svg?style=flat)](https://hub.docker.com/r/dweinstein/androguard/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/dweinstein/androguard.svg)](https://hub.docker.com/r/dweinstein/androguard/)
+[![ImageLayers Size](https://img.shields.io/imagelayers/image-size/dweinstein/androguard/latest.svg)](https://hub.docker.com/r/dweinstein/androguard/)
+
 # SYNOPSIS
 
 Docker file for building androguard dependencies w/ an **optional** interactive shell environment.
