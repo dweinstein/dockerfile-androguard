@@ -1,6 +1,6 @@
 requests
 yara
 ipython
-https://sourceforge.net/projects/pyfuzzy/files/latest/download\?source\=files#pyfuzzy-0.1.0
+git+https://github.com/dweinstein/pyfuzzy@master
 git+https://github.com/ahupp/python-magic@master
 git+https://github.com/dweinstein/androguard.git@v2.0-dw-0
