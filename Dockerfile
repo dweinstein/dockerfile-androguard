@@ -24,7 +24,6 @@ RUN apt-get update && \
 ADD ./requirements.txt /tmp/requirements.txt
 RUN cd /tmp/ && pip install -r requirements.txt
 
-VOLUME /data
 WORKDIR /opt/androguard
 
 ENV PYTHON /usr/local/bin/python2.7
